@@ -110,4 +110,28 @@ class LanguageSwitcherWidgetTest extends Unit
             $this->assertSame(sprintf('%s&%s', $this->tester::TEST_ROUTE_WITH_PARAMS, $this->tester::TEST_QUERY_STRING_2), $url);
         }
     }
+
+    /**
+     * @return void
+     */
+    public function testGetParametersReturnsUrlsWithoutDuplicateQueryParameters(): void
+    {
+        // Arrange
+        $this->tester->request->attributes->set('_route', $this->tester::TEST_ROUTE_WITH_PARAMS);
+        $queryString = parse_url($this->tester::TEST_ROUTE_WITH_PARAMS, PHP_URL_QUERY);
+        $widget = $this->tester->createLanguageSwitcherWidget(
+            $this->tester::HOME_PATH,
+            $queryString,
+            $this->tester->createRequestUri($this->tester::HOME_PATH, $queryString),
+        );
+
+        // Act
+        $parameters = $widget->getParameters();
+
+        // Assert
+        $this->assertArrayHasKey('languages', $parameters);
+        foreach ($parameters['languages'] as $url) {
+            $this->assertSame(1, substr_count($url, $queryString));
+        }
+    }
 }
