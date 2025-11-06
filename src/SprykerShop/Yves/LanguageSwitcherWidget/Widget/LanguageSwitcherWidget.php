@@ -161,11 +161,15 @@ class LanguageSwitcherWidget extends AbstractWidget
      */
     protected function getLocaleUrlWithQueryString(string $url, ?string $queryString): string
     {
-        if ($queryString) {
-            return $url . '?' . $queryString;
+        if ($queryString === null || str_contains($url, $queryString)) {
+            return $url;
         }
 
-        return $url;
+        $separator = parse_url($url, PHP_URL_QUERY) === null
+            ? static::QUERY_SEPARATOR
+            : static::QUERY_GLUE;
+
+        return sprintf(static::URL_FORMAT, $url, $separator, $queryString);
     }
 
     /**
@@ -209,15 +213,7 @@ class LanguageSwitcherWidget extends AbstractWidget
         $generatedRoute = $this->generateRoute($route, $parameters);
         $this->setRouterLocale($currentLocale);
 
-        if ($queryString === null) {
-            return $generatedRoute;
-        }
-
-        $separator = parse_url($generatedRoute, PHP_URL_QUERY) === null
-            ? static::QUERY_SEPARATOR
-            : static::QUERY_GLUE;
-
-        return sprintf(static::URL_FORMAT, $generatedRoute, $separator, $queryString);
+        return $this->getLocaleUrlWithQueryString($generatedRoute, $queryString);
     }
 
     /**
