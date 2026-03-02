@@ -27,9 +27,6 @@ class LanguageSwitcherWidgetTest extends Unit
      */
     protected LanguageSwitcherWidgetTester $tester;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -38,9 +35,6 @@ class LanguageSwitcherWidgetTest extends Unit
         $this->tester->setupContainer();
     }
 
-    /**
-     * @return void
-     */
     public function testGetParametersReturnsUrlsWithCorrectQueryParameters(): void
     {
         // Arrange
@@ -62,9 +56,6 @@ class LanguageSwitcherWidgetTest extends Unit
         }
     }
 
-    /**
-     * @return void
-     */
     public function testGetParametersReturnsUrlsWithoutQueryParameters(): void
     {
         // Arrange
@@ -86,9 +77,6 @@ class LanguageSwitcherWidgetTest extends Unit
         }
     }
 
-    /**
-     * @return void
-     */
     public function testGetParametersReturnsUrlsWithCombinedQueryParameters(): void
     {
         // Arrange
@@ -111,9 +99,6 @@ class LanguageSwitcherWidgetTest extends Unit
         }
     }
 
-    /**
-     * @return void
-     */
     public function testGetParametersReturnsUrlsWithoutDuplicateQueryParameters(): void
     {
         // Arrange

@@ -30,17 +30,11 @@ class LanguageSwitcherWidgetPlugin extends AbstractWidgetPlugin implements Langu
         $this->parameters = $widget->getParameters();
     }
 
-    /**
-     * @return string
-     */
     public static function getName(): string
     {
         return static::NAME;
     }
 
-    /**
-     * @return string
-     */
     public static function getTemplate(): string
     {
         return LanguageSwitcherWidget::getTemplate();

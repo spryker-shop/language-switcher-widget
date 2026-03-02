@@ -75,17 +75,11 @@ class LanguageSwitcherWidget extends AbstractWidget
             ->addParameter('currentLanguage', $this->getCurrentLanguage());
     }
 
-    /**
-     * @return string
-     */
     public static function getName(): string
     {
         return 'LanguageSwitcherWidget';
     }
 
-    /**
-     * @return string
-     */
     public static function getTemplate(): string
     {
         return '@LanguageSwitcherWidget/views/switcher/switcher.twig';
@@ -153,12 +147,6 @@ class LanguageSwitcherWidget extends AbstractWidget
         return $languages;
     }
 
-    /**
-     * @param string $url
-     * @param string|null $queryString
-     *
-     * @return string
-     */
     protected function getLocaleUrlWithQueryString(string $url, ?string $queryString): string
     {
         if ($queryString === null || str_contains($url, $queryString)) {
@@ -216,11 +204,6 @@ class LanguageSwitcherWidget extends AbstractWidget
         return $this->getLocaleUrlWithQueryString($generatedRoute, $queryString);
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return void
-     */
     protected function setRouterLocale(string $locale): void
     {
         $routers = $this->getGlobalContainer()->get(static::SERVICE_ROUTERS);
@@ -246,19 +229,11 @@ class LanguageSwitcherWidget extends AbstractWidget
         }
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return string
-     */
     protected function getLanguageFromLocale(string $locale): string
     {
         return substr($locale, 0, strpos($locale, '_') ?: 0);
     }
 
-    /**
-     * @return string
-     */
     protected function getCurrentLanguage(): string
     {
         return $this->getFactory()
@@ -282,12 +257,6 @@ class LanguageSwitcherWidget extends AbstractWidget
         return $filteredLanguages;
     }
 
-    /**
-     * @param string $url
-     * @param string $locale
-     *
-     * @return string
-     */
     protected function filterLanguageUrl(string $url, string $locale): string
     {
         foreach ($this->getConfig()->getExcludedLanguageSwitcherRouteUrls() as $excludedRouteUrl) {

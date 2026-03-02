@@ -14,8 +14,5 @@ interface LanguageSwitcherWidgetToLocaleClientInterface
      */
     public function getLocales(): array;
 
-    /**
-     * @return string
-     */
     public function getCurrentLanguage(): string;
 }

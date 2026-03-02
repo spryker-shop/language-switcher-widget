@@ -30,9 +30,6 @@ class LanguageSwitcherWidgetToLocaleClientBridge implements LanguageSwitcherWidg
         return $this->localeClient->getLocales();
     }
 
-    /**
-     * @return string
-     */
     public function getCurrentLanguage(): string
     {
         return $this->localeClient->getCurrentLanguage();

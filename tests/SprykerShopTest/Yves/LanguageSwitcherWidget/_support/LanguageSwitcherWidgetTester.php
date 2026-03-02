@@ -67,12 +67,6 @@ class LanguageSwitcherWidgetTester extends Actor
      */
     public Request $request;
 
-    /**
-     * @param string $pathInfo
-     * @param string|null $queryString
-     *
-     * @return string
-     */
     public function createRequestUri(string $pathInfo, ?string $queryString = null): string
     {
         if ($queryString) {
@@ -82,9 +76,6 @@ class LanguageSwitcherWidgetTester extends Actor
         return $pathInfo;
     }
 
-    /**
-     * @return void
-     */
     public function setupContainer(): void
     {
         $container = $this->getContainer();
@@ -100,9 +91,6 @@ class LanguageSwitcherWidgetTester extends Actor
         $container->set('routers', $routerMock);
     }
 
-    /**
-     * @return void
-     */
     public function setRequestAttributes(): void
     {
         $this->request = new Request();
@@ -110,13 +98,6 @@ class LanguageSwitcherWidgetTester extends Actor
         $this->request->attributes->set('_route_params', []);
     }
 
-    /**
-     * @param string $pathInfo
-     * @param string|null $queryString
-     * @param string $requestUri
-     *
-     * @return \SprykerShop\Yves\LanguageSwitcherWidget\Widget\LanguageSwitcherWidget
-     */
     public function createLanguageSwitcherWidget(string $pathInfo, ?string $queryString, string $requestUri): LanguageSwitcherWidget
     {
         $this->request->attributes->set('pathinfo', $pathInfo);

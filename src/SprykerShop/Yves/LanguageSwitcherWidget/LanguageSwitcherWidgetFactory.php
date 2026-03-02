@@ -20,9 +20,6 @@ class LanguageSwitcherWidgetFactory extends AbstractFactory
         return $this->getProvidedDependency(LanguageSwitcherWidgetDependencyProvider::CLIENT_URL_STORAGE);
     }
 
-    /**
-     * @return \SprykerShop\Yves\LanguageSwitcherWidget\Dependency\Client\LanguageSwitcherWidgetToLocaleClientInterface
-     */
     public function getLocaleClient(): LanguageSwitcherWidgetToLocaleClientInterface
     {
         return $this->getProvidedDependency(LanguageSwitcherWidgetDependencyProvider::CLIENT_LOCALE);
