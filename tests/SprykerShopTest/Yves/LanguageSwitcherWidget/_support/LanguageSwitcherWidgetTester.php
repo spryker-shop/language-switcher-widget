@@ -9,9 +9,13 @@ namespace SprykerShopTest\Yves\LanguageSwitcherWidget;
 
 use Codeception\Actor;
 use Codeception\Stub;
+use SprykerShop\Yves\LanguageSwitcherWidget\Dependency\Client\LanguageSwitcherWidgetToLocaleClientInterface;
+use SprykerShop\Yves\LanguageSwitcherWidget\Dependency\Client\LanguageSwitcherWidgetToUrlStorageClientInterface;
+use SprykerShop\Yves\LanguageSwitcherWidget\LanguageSwitcherWidgetDependencyProvider;
 use SprykerShop\Yves\LanguageSwitcherWidget\Widget\LanguageSwitcherWidget;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -82,13 +86,25 @@ class LanguageSwitcherWidgetTester extends Actor
         $container->set('request_stack', new RequestStack());
         $container->get('request_stack')->push($this->request);
 
-        $routerMock = Stub::makeEmpty(RouterInterface::class);
-        $routerMock->method('generate')
-            ->willReturnCallback(function ($route, $parameters = []) {
+        $requestContext = new RequestContext();
+        $routerMock = Stub::makeEmpty(RouterInterface::class, [
+            'generate' => function ($route, $parameters = []) {
                 return $route . http_build_query($parameters);
-            });
-
+            },
+            'getContext' => $requestContext,
+        ]);
         $container->set('routers', $routerMock);
+
+        $localeClientMock = Stub::makeEmpty(LanguageSwitcherWidgetToLocaleClientInterface::class, [
+            'getLocales' => ['en' => 'en_US'],
+            'getCurrentLanguage' => 'en',
+        ]);
+        $this->setDependency(LanguageSwitcherWidgetDependencyProvider::CLIENT_LOCALE, $localeClientMock);
+
+        $urlStorageClientMock = Stub::makeEmpty(LanguageSwitcherWidgetToUrlStorageClientInterface::class, [
+            'findUrlStorageTransferByUrl' => null,
+        ]);
+        $this->setDependency(LanguageSwitcherWidgetDependencyProvider::CLIENT_URL_STORAGE, $urlStorageClientMock);
     }
 
     public function setRequestAttributes(): void
