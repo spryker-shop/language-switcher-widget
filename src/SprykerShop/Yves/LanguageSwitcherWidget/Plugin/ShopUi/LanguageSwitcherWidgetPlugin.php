@@ -17,11 +17,9 @@ use SprykerShop\Yves\ShopUi\Dependency\Plugin\LanguageSwitcherWidget\LanguageSwi
 class LanguageSwitcherWidgetPlugin extends AbstractWidgetPlugin implements LanguageSwitcherWidgetPluginInterface
 {
     /**
-     * @param string $pathInfo
-     * @param string $queryString
-     * @param string $requestUri
+     * {@inheritDoc}
      *
-     * @return void
+     * @param string $queryString
      */
     public function initialize(string $pathInfo, $queryString, string $requestUri): void
     {
@@ -30,11 +28,21 @@ class LanguageSwitcherWidgetPlugin extends AbstractWidgetPlugin implements Langu
         $this->parameters = $widget->getParameters();
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     */
     public static function getName(): string
     {
         return static::NAME;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     */
     public static function getTemplate(): string
     {
         return LanguageSwitcherWidget::getTemplate();
