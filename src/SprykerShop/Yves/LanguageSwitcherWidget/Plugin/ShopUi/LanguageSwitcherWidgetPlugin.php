@@ -9,13 +9,17 @@ namespace SprykerShop\Yves\LanguageSwitcherWidget\Plugin\ShopUi;
 
 use Spryker\Yves\Kernel\Widget\AbstractWidgetPlugin;
 use SprykerShop\Yves\LanguageSwitcherWidget\Widget\LanguageSwitcherWidget;
-use SprykerShop\Yves\ShopUi\Dependency\Plugin\LanguageSwitcherWidget\LanguageSwitcherWidgetPluginInterface;
 
 /**
  * @deprecated Use {@link \SprykerShop\Yves\LanguageSwitcherWidget\Widget\LanguageSwitcherWidget} instead.
  */
-class LanguageSwitcherWidgetPlugin extends AbstractWidgetPlugin implements LanguageSwitcherWidgetPluginInterface
+class LanguageSwitcherWidgetPlugin extends AbstractWidgetPlugin
 {
+    /**
+     * @var string
+     */
+    public const NAME = 'LanguageSwitcherWidgetPlugin';
+
     /**
      * {@inheritDoc}
      *
